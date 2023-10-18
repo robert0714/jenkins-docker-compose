@@ -1,7 +1,6 @@
 # reference https://github.com/jenkinsci/docker/issues/177
 # sudo mkdir -p $PWD/mnt/sdb/jenkins-data
 # sudo chown -R 1000:1000 $PWD/mnt/sdb/jenkins-data
-version: '3'
 services:
   jenkins:
     image: 'jenkins/jenkins:2.401.2-lts-jdk11'
@@ -11,10 +10,13 @@ services:
     ports:
       - '8001:8080'
       - '5000:5000'
+    # extra_hosts:
+    #   - "mirrors.tuna.tsinghua.edu.cn:127.0.0.1"
     volumes:
       - $PWD/mnt/sdb/jenkins-data:/var/jenkins_home:Z
     environment:
-      - TZ=Asia/Taipei
+      - TZ=Asia/
+      - JENKINS_UC_DOWNLOAD=http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/
     #  - JAVA_OPTS=" -Djenkins.install.runSetupWizard=false"
       - JENKINS_OPTS="--prefix=/jenkins"
       - JENKINS_PREFIX="/jenkins"
