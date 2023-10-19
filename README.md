@@ -49,3 +49,22 @@ exit
 
 docker restart jenkins
 ```
+### Install Pluging - Pipeline: AWS Steps
+* Reference:
+  * https://plugins.jenkins.io/pipeline-aws/
+  * https://dev.to/aws-builders/how-to-set-up-jenkins-and-a-pipeline-on-aws-2pak
+* Using jenkins-plugin-cli (including dependncies):
+  ```bash
+  docker exec -it jenkins bash
+  export JENKINS_UC_DOWNLOAD=http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/
+
+  jenkins-plugin-cli -d $JENKINS_HOME/plugins/ --plugins  jdk-tool aws-java-sdk-sqs aws-java-sdk-sns \
+  aws-java-sdk-cloudformation aws-java-sdk-elasticbeanstalk \
+  aws-java-sdk-ecs aws-java-sdk-iam aws-java-sdk-ecr \
+  aws-java-sdk-efs aws-java-sdk-ssm aws-java-sdk-kinesis \
+  aws-java-sdk-logs aws-java-sdk-codebuild \
+  aws-java-sdk-secretsmanager  \
+  aws-java-sdk \
+  pipeline-aws
+  ```
+  * ⚠ **aws-java-sdk** is too big ( 265 MB ) . You can [direct download it](https://plugins.jenkins.io/aws-java-sdk/releases/).
